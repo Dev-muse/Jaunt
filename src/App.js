@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {getPlacesData} from './api'
+import {getPlacesData,getWeatherData} from './api'
 import {CssBaseline , Grid} from '@material-ui/core'
 import Header from './components/Header/Header'
 import List from './components/List/List'
@@ -10,8 +10,10 @@ function App() {
     const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState('');
 
-    // Map coordinate state
+    // Map coordinate states
     const [coordinates, setCoordinates] = useState({});
+    const [bounds , setBounds] = useState({})
+    
 
     // child clicked state for List & Map
     const [childClicked, setChildClicked] = useState(null)
@@ -20,48 +22,54 @@ function App() {
     const [isLoading,setIsLoading] = useState(false);
 
 
-    // Map bounds state 
-    const [bounds , setBounds] = useState({})
-
-    // store travel api data in state
+    // store api data in state
     const [places,setPlaces] = useState([]);
+    const [weatherData,setWeatherData] = useState([]);
 
     const [filteredPlaces,setFilteredPlaces] = useState([]);
     
-    // set users location as default coordinates
+    // set users location as default map coordinates
     useEffect(()=> {
-        navigator.geolocation.getCurrentPosition(({coords:{latitude,longitude}})=>{
+        navigator.geolocation.getCurrentPosition(({coords:{latitude,longitude} })=>{
             setCoordinates({lat: latitude, lng: longitude})
+            
         })
         },[])
-    
+
+
+    // filter places data on change of rating state
     useEffect(()=>{
-        const filteredPlaces = places?.filter((place)=>place.rating > rating)
-        setFilteredPlaces(filteredPlaces)
+        const filtered = places.filter((place) => Number(place.rating) > rating);
+        setFilteredPlaces(filtered)
         
     },[rating])
 
 
 
-    //store api places data in state on map change 
+    //getting api weather and places data and set in state
     useEffect(()=>{
-        setIsLoading(true);
+        
+        if(bounds.sw && bounds.ne){
 
-        getPlacesData(type,bounds.sw, bounds.ne)
-            .then((data)=>{
-                setPlaces(data);
+           setIsLoading(true);
+
+           getWeatherData(coordinates.lat, coordinates.lng).then(data=>setWeatherData(data))
+
+            getPlacesData(type,bounds.sw, bounds.ne).then((data)=>{
+                setPlaces(data?.filter(place=>place.name && place.num_reviews > 0));
                 setFilteredPlaces([])
                 setIsLoading(false);
             })
+        }
 
-    },[coordinates,bounds,type]);
+    },[bounds,type]);
 
 
 
     return (
         <>
             <CssBaseline />
-            <Header />
+            <Header setCoordinates={setCoordinates} />
             <Grid container spacing={3} style={{width:'100%'}}>
                 <Grid item md={4} xs={12}>
                     <List places={filteredPlaces.length? filteredPlaces : places} 
@@ -75,6 +83,7 @@ function App() {
                          coordinates = {coordinates} 
                          places={filteredPlaces.length? filteredPlaces : places}
                          setChildClicked={setChildClicked}
+                         weatherData={weatherData}
                          />
                 </Grid>
             </Grid>                   

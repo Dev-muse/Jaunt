@@ -10,15 +10,12 @@ function List({places,childClicked,isLoading,rating,type,setRating,setType}) {
 
     const [elRefs,setElRefs] = useState([]);
 
-    useEffect(()=>{
-        // create as many refs as places
-        const refs = Array(places?.length).fill().map((_,i)=>elRefs[i] || createRef());
-
-        setElRefs(refs);
-    },[places])
-
-    console.log({childClicked})
-
+    
+    useEffect(() => {
+        setElRefs((refs) => Array(places.length).fill().map((_, i) => refs[i] || createRef()));
+      }, [places]);
+    
+ 
     return (
         <div className = {classes.container}>
             <Typography variant="h4">Restaurants, Hotels and Attractions near you</Typography>
@@ -49,18 +46,13 @@ function List({places,childClicked,isLoading,rating,type,setRating,setType}) {
 
                     <Grid container spacing={3} className={classes.list}>
                         {
-                            places?.map((place,index)=> (
-                                <Grid item key={index} xs={12}>
-                                    <PlaceDetails 
-                                    place={place}
-                                    selected={Number(childClicked) === index}
-                                    refProp={elRefs[index]}
-                                    />
-
-                                </Grid>
-                            ))
+                        places?.map((place, i) => (
+                        <Grid ref={elRefs[i]} key={i} item xs={12}>
+                            <PlaceDetails selected={Number(childClicked) === i} 
+                                          refProp={elRefs[i]} place={place} />
+                        </Grid>
+                        ))
                         }
-
                     </Grid>
                 </>
              )};
