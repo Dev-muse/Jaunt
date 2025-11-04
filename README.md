@@ -37,7 +37,7 @@ Jaunt is a modern, responsive travel advisor application that helps explorers di
 
 ## 🚀 Live Demo
 
-Experience Jaunt in action: **[https://jauntapp.netlify.app/](https://jauntapp.netlify.app/)**
+Experience Jaunt in action: **[Live](https://jaunt-gold.vercel.app/)**
 
 ---
 
