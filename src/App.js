@@ -31,8 +31,7 @@ function App() {
       },
       (error) => {
         console.error("Geolocation error:", error);
-        // Fallback to a default location (e.g., London)
-        setCoordinates({ lat: 51.507, lng: -0.127 });
+        setCoordinates({ lat: 51.507, lng: -0.127 }); // fallback location
       }
     );
   }, []);
@@ -43,53 +42,50 @@ function App() {
     setFilteredPlaces(filtered);
   }, [rating, places]);
 
-  // Fetch weather and places data when bounds or type changes
- useEffect(() => {
-  if (!bounds.sw || !bounds.ne) return;
+  // Fetch places data when bounds or type changes
+  useEffect(() => {
+    if (!bounds.sw || !bounds.ne) return;
 
-  const fetchData = async () => {
-    setIsLoading(true);
-
-    try {
-      // Fetch both APIs concurrently
-      const [placesResult, weatherResult] = await Promise.allSettled([
-        getPlacesData(type, bounds.sw, bounds.ne),
-        getWeatherData(coordinates.lat, coordinates.lng),
-      ]);
-
-      // Handle places data
-      if (placesResult.status === "fulfilled") {
-        const safePlaces = placesResult.value?.filter(
+    const fetchPlaces = async () => {
+      setIsLoading(true);
+      try {
+        const data = await getPlacesData(type, bounds.sw, bounds.ne);
+        const safePlaces = data?.filter(
           (place) => place.name && place.num_reviews > 0
         );
         setPlaces(safePlaces || []);
         setFilteredPlaces([]); // reset filtered
-      } else {
-        console.error("Error fetching places:", placesResult.reason);
-        setPlaces([]); // safe fallback
+      } catch (error) {
+        console.error("Error fetching places:", error);
+        setPlaces([]);
         setFilteredPlaces([]);
+      } finally {
+        setIsLoading(false);
       }
+    };
 
-      // Handle weather data
-      if (weatherResult.status === "fulfilled") {
-        setWeatherData(weatherResult.value || []);
-      } else {
-        console.error("Error fetching weather:", weatherResult.reason);
-        setWeatherData([]); // safe fallback
+    fetchPlaces();
+  }, [bounds, type]);
+
+  // Fetch weather data when coordinates change
+  useEffect(() => {
+    if (!coordinates.lat || !coordinates.lng) return;
+
+    const fetchWeather = async () => {
+      setIsLoading(true);
+      try {
+        const data = await getWeatherData(coordinates.lat, coordinates.lng);
+        setWeatherData(data || []);
+      } catch (error) {
+        console.error("Error fetching weather:", error);
+        setWeatherData([]);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error("Unexpected error fetching data:", error);
-      setPlaces([]);
-      setFilteredPlaces([]);
-      setWeatherData([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    };
 
-  fetchData();
-}, [bounds, type]); // coordinates removed from dependencies
-
+    fetchWeather();
+  }, [coordinates.lat, coordinates.lng]);
 
   return (
     <LoadScript
