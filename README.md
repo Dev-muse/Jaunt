@@ -1,175 +1,287 @@
-# 🌍 Jaunt - Travel Advisor Application
+# 🌍 Jaunt - Your Travel Companion
 
-Jaunt is a modern travel companion application that helps users discover top attractions, restaurants, and hotels from around the world. Built with React and powered by Google Maps API and Travel Advisor API, Jaunt provides an intuitive interface to explore destinations with real-time weather information.
+<div align="center">
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://jauntapp.netlify.app/)
-[![React](https://img.shields.io/badge/React-17.0.2-blue)](https://reactjs.org/)
-[![Material-UI](https://img.shields.io/badge/Material--UI-4.12.3-blue)](https://material-ui.com/)
+![Jaunt Logo](src/assets/logo.svg)
 
-## 🎯 Features
+**Discover the world's best restaurants, hotels, and attractions with real-time weather information**
 
-- **🗺️ Interactive Map**: Explore locations with an interactive Google Maps interface
-- **📍 Geolocation**: Automatically detects your current location
-- **🔍 Smart Search**: Search for places anywhere in the world
-- **🏨 Multiple Categories**: Find restaurants, hotels, and attractions
-- **⭐ Rating Filter**: Filter results by user ratings
-- **🌤️ Weather Integration**: Get real-time weather information for any location
-- **📱 Responsive Design**: Seamless experience across all devices
-- **🎨 Material Design**: Beautiful and intuitive Material-UI interface
+[![React](https://img.shields.io/badge/React-17.0.2-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
+[![Material-UI](https://img.shields.io/badge/Material--UI-4.12.3-0081CB?style=for-the-badge&logo=material-ui&logoColor=white)](https://material-ui.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-## 🚀 Demo
+[Live Demo](https://jaunt-gold.vercel.app/) • [Report Bug](https://github.com/Dev-muse/Jaunt/issues) • [Request Feature](https://github.com/Dev-muse/Jaunt/issues)
 
-Check out the live demo: [Jaunt App](https://jaunt-gold.vercel.app/)
+</div>
 
-## 🛠️ Tech Stack
+---
 
-**Frontend:**
-- React 17.0.2
-- Material-UI 4.12.3
-- Google Maps API
-- Axios
+## 📖 About The Project
 
-**APIs:**
-- Travel Advisor API (RapidAPI)
-- Open Weather Map API (RapidAPI)
+Jaunt is a modern, responsive travel advisor application that helps explorers discover amazing places around the world. Whether you're searching for the perfect restaurant, a comfortable hotel, or exciting attractions, Jaunt provides detailed information, ratings, and real-time weather data to help you make informed decisions.
+
+### ✨ Key Features
+
+- 🗺️ **Interactive Google Maps** - Seamlessly explore locations with a fully interactive map interface
+- 📍 **Geolocation Support** - Automatically detects and centers on your current location
+- 🔍 **Smart Autocomplete Search** - Powered by Google Places API for instant location search
+- 🏨 **Multiple Categories** - Browse restaurants, hotels, and attractions in any area
+- ⭐ **Rating Filters** - Filter places by minimum rating (3.0, 3.5, 4.0, 4.5+)
+- 🌤️ **Real-Time Weather** - View current weather conditions for any location
+- 📱 **Fully Responsive** - Optimized experience across desktop, tablet, and mobile devices
+- 🎨 **Beautiful UI** - Clean, modern interface built with Material-UI
+- 🖼️ **Rich Place Details** - View photos, ratings, reviews, pricing, and contact information
+- 🔄 **Dynamic Updates** - Results update automatically as you pan and zoom the map
+
+---
+
+## 🚀 Live Demo
+
+Experience Jaunt in action: **[https://jauntapp.netlify.app/](https://jauntapp.netlify.app/)**
+
+---
+
+## 🛠️ Built With
+
+**Frontend Framework:**
+- [React](https://reactjs.org/) - JavaScript library for building user interfaces
+- [Material-UI](https://material-ui.com/) - React UI framework
+
+**APIs & Services:**
+- [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript) - Interactive maps and geolocation
+- [Google Places API](https://developers.google.com/maps/documentation/places/web-service) - Autocomplete search
+- [Travel Advisor API](https://rapidapi.com/apidojo/api/travel-advisor) - Restaurant, hotel, and attraction data
+- [Open Weather Map API](https://rapidapi.com/community/api/open-weather-map) - Real-time weather information
+
+**Additional Libraries:**
+- [Axios](https://axios-http.com/) - HTTP client for API requests
+- [google-map-react](https://github.com/google-map-react/google-map-react) - Google Maps wrapper component
+
+---
 
 ## 📋 Prerequisites
 
-Before you begin, ensure you have the following installed:
-- Node.js (v14 or higher)
-- npm or yarn
-- A RapidAPI account for API keys
-- Google Maps API key
+Before running this project, make sure you have:
 
-## 🔧 Installation
+- **Node.js** (v14.0 or higher) - [Download](https://nodejs.org/)
+- **npm** or **yarn** package manager
+- **API Keys** (see setup instructions below):
+  - RapidAPI account (for Travel Advisor & Weather APIs)
+  - Google Cloud account (for Maps & Places APIs)
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Dev-muse/Jaunt.git
-   cd Jaunt
-   ```
+---
 
-   
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+## ⚙️ Installation & Setup
 
-3. **Set up environment variables**
-   
-   Create a `.env` file in the root directory and add your API key:
-   ```env
-   REACT_APP_RAPIDAPI_KEY=your_rapidapi_key_here
-   ```
+### 1️⃣ Clone the Repository
 
-4. **Update Google Maps API Key**
-   
-   Open `public/index.html` and replace the Google Maps API key in the script tag with your own:
-   ```html
-   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=YOUR_GOOGLE_MAPS_API_KEY"></script>
-   ```
+```bash
+git clone https://github.com/Dev-muse/Jaunt.git
+cd Jaunt
+```
 
-5. **Start the development server**
-   ```bash
-   npm start
-   ```
 
-   The app will open at [http://localhost:3000](http://localhost:3000)
+### 2️⃣ Install Dependencies
 
-## 🔑 Getting API Keys
+```bash
+npm install
+```
 
-### RapidAPI Key
+or if you prefer yarn:
+
+```bash
+yarn install
+```
+
+### 3️⃣ Get Your API Keys
+
+#### **RapidAPI Keys** (Travel Advisor & Weather)
+
 1. Sign up at [RapidAPI](https://rapidapi.com/)
 2. Subscribe to [Travel Advisor API](https://rapidapi.com/apidojo/api/travel-advisor)
 3. Subscribe to [Open Weather Map API](https://rapidapi.com/community/api/open-weather-map)
-4. Copy your API key from the dashboard
+4. Copy your RapidAPI key from the dashboard
 
-### Google Maps API Key
+#### **Google Maps API Key**
+
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select an existing one
-3. Enable Maps JavaScript API
-4. Create credentials (API Key)
+2. Create a new project (or select an existing one)
+3. Enable the following APIs:
+   - Maps JavaScript API
+   - Places API
+   - Geocoding API
+4. Navigate to **Credentials** → **Create Credentials** → **API Key**
 5. Copy your API key
+6. **Important:** Restrict your API key to prevent unauthorized use
 
-## 📜 Available Scripts
+### 4️⃣ Configure Environment Variables
 
-- `npm start` - Runs the app in development mode
-- `npm build` - Builds the app for production
-- `npm test` - Launches the test runner
-- `npm eject` - Ejects from Create React App (one-way operation)
+Create a `.env` file in the root directory:
+
+```env
+REACT_APP_RAPIDAPI_KEY=your_rapidapi_key_here
+REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+```
+
+**Security Note:** Never commit your `.env` file to version control. It's already included in `.gitignore`.
+
+### 5️⃣ Start the Development Server
+
+```bash
+npm start
+```
+
+The application will automatically open at [http://localhost:3000](http://localhost:3000)
+
+---
 
 ## 📁 Project Structure
 
 ```
 jaunt/
 ├── public/
-│   ├── index.html
-│   └── ...
+│   ├── index.html              # HTML template
+│   ├── favicon.ico
+│   └── manifest.json
 ├── src/
 │   ├── api/
-│   │   └── index.js          # API calls
+│   │   └── index.js            # API integration (Travel Advisor & Weather)
 │   ├── assets/
-│   │   └── logo.svg
+│   │   └── logo.svg            # Application logo
 │   ├── components/
-│   │   ├── Header/           # Search header component
-│   │   ├── List/             # Places list component
-│   │   └── Map/              # Map component
-│   ├── App.js                # Main app component
-│   └── index.js              # Entry point
-├── .env                      # Environment variables
+│   │   ├── Header/
+│   │   │   ├── Header.jsx      # Search bar with autocomplete
+│   │   │   └── styles.js       # Component styles
+│   │   ├── List/
+│   │   │   ├── List.jsx        # Places list with filters
+│   │   │   └── styles.js
+│   │   ├── Map/
+│   │   │   ├── Map.jsx         # Interactive Google Map
+│   │   │   ├── mapStyles.js    # Custom map styling
+│   │   │   └── styles.js
+│   │   └── PlaceDetails/
+│   │       ├── PlaceDetails.jsx # Individual place card
+│   │       └── styles.js
+│   ├── App.js                  # Main application component
+│   └── index.js                # Application entry point
+├── .env                        # Environment variables (create this)
+├── .gitignore
 ├── package.json
 └── README.md
 ```
 
+---
+
 ## 🎮 How to Use
 
-1. **Allow Location Access**: Grant permission for the app to access your location
-2. **Explore the Map**: Pan and zoom to explore different areas
-3. **Search Locations**: Use the search bar to find specific places
-4. **Filter Results**: 
-   - Select type (Restaurants, Hotels, Attractions)
-   - Filter by minimum rating
-5. **View Details**: Click on markers or list items to see more information
-6. **Check Weather**: View current weather conditions for the displayed location
+1. **Allow Location Access**  
+   When prompted, grant the application permission to access your location for automatic positioning.
 
-## 🌐 APIs Used
+2. **Explore the Map**  
+   Pan, zoom, and navigate the interactive map to discover places around the world.
 
-- **Travel Advisor API**: Provides data for restaurants, hotels, and attractions
-- **Open Weather Map API**: Supplies real-time weather information
-- **Google Maps JavaScript API**: Powers the interactive map interface
+3. **Search for Locations**  
+   Use the search bar at the top to find specific cities, addresses, or points of interest.
+
+4. **Filter Your Results**
+   - **Type:** Choose between Restaurants, Hotels, or Attractions
+   - **Rating:** Set a minimum rating filter (e.g., show only 4+ star places)
+
+5. **View Place Details**  
+   Click on map markers or list items to see detailed information including:
+   - Photos
+   - Ratings and reviews
+   - Price range
+   - Contact information
+   - Rankings
+
+6. **Check the Weather**  
+   View real-time weather conditions for the current map location.
+
+---
+
+## 📜 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Runs the app in development mode at [http://localhost:3000](http://localhost:3000) |
+| `npm build` | Builds the app for production to the `build` folder |
+| `npm test` | Launches the test runner in interactive watch mode |
+| `npm eject` | Ejects from Create React App (⚠️ irreversible) |
+
+---
+
+## 🐛 Troubleshooting
+
+### Map not loading?
+- Verify your Google Maps API key is correct in `.env`
+- Ensure Maps JavaScript API is enabled in Google Cloud Console
+- Check browser console for API errors
+
+### No places showing up?
+- Confirm your RapidAPI key is valid and has active subscriptions
+- Check that you haven't exceeded API rate limits
+- Try zooming in closer to a specific location
+
+### Location not detecting?
+- Allow location permissions in your browser
+- Check that your browser supports geolocation
+- Try manually searching for a location
+
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Here's how you can help:
+Contributions make the open-source community an amazing place to learn and create! Any contributions you make are **greatly appreciated**.
 
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
+---
 
-This project is open source and available under the [MIT License](LICENSE).
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
 
 ## 👨‍💻 Author
 
-**Rahman muse**
+**Rahman Muse**
+
 - GitHub: [@Dev-muse](https://github.com/Dev-muse)
+- Project Link: [https://github.com/Dev-muse/Jaunt](https://github.com/Dev-muse/Jaunt)
 
-## 🙏 Acknowledgements
+---
 
-- [React Documentation](https://reactjs.org/)
-- [Material-UI](https://material-ui.com/)
+## 🙏 Acknowledgments
+
+- [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [Material-UI Components](https://material-ui.com/components/)
 - [Google Maps Platform](https://developers.google.com/maps)
-- [RapidAPI](https://rapidapi.com/)
-- [Awesome README Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
-- [How to Write a Good README](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+- [RapidAPI Hub](https://rapidapi.com/)
+- [Create React App](https://create-react-app.dev/)
+- Icons by [Material-UI Icons](https://material-ui.com/components/material-icons/)
+
+---
 
 ## 📧 Support
 
-If you have any questions or run into issues, please open an issue on GitHub.
+If you encounter any issues or have questions:
 
+- 🐛 [Open an Issue](https://github.com/Dev-muse/Jaunt/issues)
+- 💬 [Start a Discussion](https://github.com/Dev-muse/Jaunt/discussions)
 
-**Made with ❤️ by Dev-muse**
-  
+---
+
+<div align="center">
+
+**⭐ Star this repository if you find it helpful!**
+
+Made with ❤️ by [Dev-muse](https://github.com/Dev-muse)
+
+</div>
+ 
