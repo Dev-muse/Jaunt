@@ -11,8 +11,7 @@ const Map = ({coordinates,setCoordinates,setBounds,places,setChildClicked,weathe
 
     // set to false if device width >600px
     const isDesktop = useMediaQuery('(min-width:600px)');
-    console.log({weatherData})
-
+ 
 
     return (
         <div className={classes.mapContainer}>
