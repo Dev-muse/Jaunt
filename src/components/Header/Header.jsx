@@ -15,8 +15,7 @@ function Header({setCoordinates}) {
         const lat = autocomplete.getPlace().geometry.location.lat();
         const lng = autocomplete.getPlace().geometry.location.lng();
 
-        console.log(lat)
-        // update coordinate state on app
+         // update coordinate state on app
         setCoordinates({lat,lng})
     }
     return (
