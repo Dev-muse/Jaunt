@@ -28,6 +28,11 @@ function App() {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
         setCoordinates({ lat: latitude, lng: longitude });
+      },
+      (error) => {
+        console.error("Geolocation error:", error);
+        // Fallback to a default location (e.g., London)
+        setCoordinates({ lat: 51.507, lng: -0.127 });
       }
     );
   }, []);
@@ -39,21 +44,52 @@ function App() {
   }, [rating, places]);
 
   // Fetch weather and places data when bounds or type changes
-  useEffect(() => {
-    if (bounds.sw && bounds.ne) {
-      setIsLoading(true);
+ useEffect(() => {
+  if (!bounds.sw || !bounds.ne) return;
 
-      getWeatherData(coordinates.lat, coordinates.lng).then((data) =>
-        setWeatherData(data)
-      );
+  const fetchData = async () => {
+    setIsLoading(true);
 
-      getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
-        setPlaces(data?.filter((place) => place.name && place.num_reviews > 0));
+    try {
+      // Fetch both APIs concurrently
+      const [placesResult, weatherResult] = await Promise.allSettled([
+        getPlacesData(type, bounds.sw, bounds.ne),
+        getWeatherData(coordinates.lat, coordinates.lng),
+      ]);
+
+      // Handle places data
+      if (placesResult.status === "fulfilled") {
+        const safePlaces = placesResult.value?.filter(
+          (place) => place.name && place.num_reviews > 0
+        );
+        setPlaces(safePlaces || []);
+        setFilteredPlaces([]); // reset filtered
+      } else {
+        console.error("Error fetching places:", placesResult.reason);
+        setPlaces([]); // safe fallback
         setFilteredPlaces([]);
-        setIsLoading(false);
-      });
+      }
+
+      // Handle weather data
+      if (weatherResult.status === "fulfilled") {
+        setWeatherData(weatherResult.value || []);
+      } else {
+        console.error("Error fetching weather:", weatherResult.reason);
+        setWeatherData([]); // safe fallback
+      }
+    } catch (error) {
+      console.error("Unexpected error fetching data:", error);
+      setPlaces([]);
+      setFilteredPlaces([]);
+      setWeatherData([]);
+    } finally {
+      setIsLoading(false);
     }
-  }, [bounds, type, coordinates]);
+  };
+
+  fetchData();
+}, [bounds, type]); // coordinates removed from dependencies
+
 
   return (
     <LoadScript
@@ -75,7 +111,6 @@ function App() {
           />
         </Grid>
         <Grid item md={8} xs={12}>
-       
           <Map
             setCoordinates={setCoordinates}
             setBounds={setBounds}
