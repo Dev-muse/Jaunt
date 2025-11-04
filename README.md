@@ -19,7 +19,7 @@ Jaunt is a modern travel companion application that helps users discover top att
 
 ## 🚀 Demo
 
-Check out the live demo: [Jaunt App](https://jauntapp.netlify.app/)
+Check out the live demo: [Jaunt App](https://jaunt-gold.vercel.app/)
 
 ## 🛠️ Tech Stack
 
